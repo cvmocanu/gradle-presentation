@@ -1,0 +1,35 @@
+=== Lifecycle
+
+* why do we need `doLast`?
+
+.Three build phases
+* *1. initialization*
+** run `settings.gradle.kts` to create `Project` instances
++
+.settings.gradle.kts from o2p-lib
+[source, kotlin]
+----
+rootProject.name = "o2p-lib"
+
+include("o2p-platform")
+
+include("o2p-error")
+include("o2p-exceptions")
+include("o2p-httpclient")
+include("o2p-kafka")
+include("o2p-logging-service-model")
+include("o2p-logging-service-client")
+include("o2p-model")
+include("o2p-mybatis")
+include("o2p-sftpclient")
+include("o2p-testsupport")
+include("o2p-text")
+include("o2p-tracing")
+include("o2p-tracing-model")
+----
+* *2. configuration*
+** run `build.gradle.kts` for each project to configure `Project` instances
+** the result is a DAG of tasks
+* *3. execution*
+** determine what tasks to run (and in what order; parallelize if possible)
+** run tasks

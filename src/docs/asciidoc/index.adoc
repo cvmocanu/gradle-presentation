@@ -1,0 +1,12 @@
+= Gradle presentation
+:toc:
+
+include::terminology.adoc[]
+
+include::basic-project-setup.adoc[]
+
+include::lifecycle.adoc[]
+
+include::lifecycle-demo.adoc[]
+
+include::tasks-dependencies.adoc[]

@@ -1,0 +1,100 @@
+=== Tasks dependencies
+
+* tell: we could use `doFirst`/`doLast` to attach actions before/after an existing task (e.g. java compilation)
+* but it's better to create a separate task and setup task dependencies
+* revert changes to `settings.gradle.kts`
++
+.settings.gradle.kts
+[source, kotlin]
+----
+rootProject.name = "sample-lifecycle"
+----
+* tasks with dependencies
++
+.build.gradle.kts
+[source, kotlin]
+----
+tasks.register("hello") {
+    doLast {
+        println("Hi there!")
+    }
+}
+
+val pourHotWaterTask = tasks.register("pourWater") {
+    doLast {
+        println("pouring hot water in a mug")
+    }
+}
+
+val addTeaBagsTask = tasks.register("addTeaBags") {
+    dependsOn(pourHotWaterTask)
+
+    doLast {
+        println("adding tea bags")
+    }
+}
+
+val addHoneyTask = tasks.register("addHoney") {
+    dependsOn(pourHotWaterTask)
+
+    doLast {
+        println("adding honey")
+    }
+}
+
+val makeTeaTask = tasks.register("makeTea") {
+    dependsOn(addTeaBagsTask)
+    dependsOn(addHoneyTask)
+
+    doLast {
+        println("making tea")
+    }
+}
+
+
+----
+* `./gradlew tasks --all`
+* `./gradlew makeTea`
+* review build phases
+* tell: after the configuration phase we have a DAG (directed acyclic graph) of tasks
+** {blank}
++
+[plantuml,class-diagram,png]
+----
+@startdot
+digraph D {
+    node [shape=record fontname=Arial];
+
+    makeTea -> addTeaBags
+    makeTea -> addHoney
+    addTeaBags -> pourHotWater
+    addHoney -> pourHotWater
+    hello
+}
+@enddot
+----
+* tell: in the execution phase
+** first we determine what tasks to execute
+** then we execute the tasks and their dependencies, in the proper order
+* global config to see tasks DAG as a tree
++
+.~/.gradle/.init.d/gradle-task-tree.gradle.kts
+[source, kotlin]
+----
+initscript {
+    repositories {
+        maven {
+          url = java.net.URI("https://plugins.gradle.org/m2/")
+        }
+    }
+    dependencies {
+        classpath("gradle.plugin.com.dorongold.plugins:task-tree:1.5")
+    }
+}
+
+rootProject {
+    apply<com.dorongold.gradle.tasktree.TaskTreePlugin>()
+}
+----
+* `./gradlew makeTea tasksTree`
+* `./gradlew makeTea hello tasksTree`

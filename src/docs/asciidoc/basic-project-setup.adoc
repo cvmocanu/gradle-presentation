@@ -1,0 +1,76 @@
+=== Basic project setup
+
+* show and explain my `~/.gradle/gradle.properties`
++
+[source, properties]
+----
+# reuse task outputs from any previous build, when possible
+org.gradle.caching=true
+
+# the Gradle Daemon is used to run the build (improves build times)
+org.gradle.daemon=true
+
+# execute tasks in parallel (if they are in different projects)
+org.gradle.parallel=true
+
+# Toggles watching the file system. Allows Gradle to re-use information about the file system in the next build.
+org.gradle.vfs.watch=true
+
+# show all warnings
+org.gradle.warning.mode=all
+----
+* `mkcd sample-lifecycle`
+* `git it`
+* `gradle init`
+** project type     "1: basic"
+** build script DSL "2: Kotlin" (for IntelliJ support)
+* import in IntelliJ
+* setup `.gitignore` (add IntelliJ files; group gradle files)
+* delete comments in `settings.gradle.kts`
+* delete comments in `build.gradle.kts`
+* commit
+* gradle wrapper
+** show my `g` alias (`which g`)
+** `--version`
+** `--help`
+** debugging
+*** `--console=plain`
+*** `--info` and `--debug`
+*** `--stacktrace`
+*** `--no-build-cache`
+*** `--no-daemon`
+** `-D` / `--system-prop`
+** `-P` / `--project-prop`
+** `-x` / `--exclude-task` (e.g. `./gradlew -x test -x pmd build`)
+* `./gradlew tasks [--all]`
+* show how to setup the `taskTree` plugin
+
+=== Simple custom task
+
+* {blank}
++
+.build.gradle.kts
+[source, kotlin]
+----
+tasks.create("hello") {
+    doLast {
+        println("Hi there!")
+    }
+}
+----
+* `./gradlew tasks`
+* our task is not there
+* `./gradlew tasks --all`
+* explain: missing group
+* set group and show that it now appears only with `./gradlew tasks`
++
+.build.gradle.kts
+[source, kotlin]
+----
+tasks.create("hello") {
+    group = "FedEx"
+    doLast {
+        println("Hi there!")
+    }
+}
+----

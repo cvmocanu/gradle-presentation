@@ -1,0 +1,54 @@
+=== Lifecycle demo
+
+* {blank}
++
+.settings.gradle.kts
+[source, kotlin]
+----
+rootProject.name = "sample-lifecycle"
+
+println("initializing")
+----
+* {blank}
++
+.build.gradle.kts
+[source, kotlin]
+----
+println("configuring project")
+
+tasks.create("hello") {
+    println("configuring task")
+    group = "FedEx"
+
+    doLast {
+        println("running task")
+
+        println("Hi there!")
+    }
+}
+----
+* `./gradlew`. Notice and explain the messages.
+* `./gradlew hello`. Notice and explain the messages.
+* explain `doLast`
+* tell: there is also `doFirst`
+* {blank}
++
+.build.gradle.kts
+[source, kotlin]
+----
+println("configuring project")
+
+tasks.register("hello") {
+    println("configuring task")
+    group = "FedEx"
+
+    doLast {
+        println("running task")
+
+        println("Hi there!")
+    }
+}
+----
+* `./gradlew`. Notice and explain the messages (missing task configuration).
+* `./gradlew hello`. Notice and explain the messages.
+* lesson: use `register` instead of `create`
