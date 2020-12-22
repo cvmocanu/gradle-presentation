@@ -1,0 +1,29 @@
+== Simple custom task
+
+* {blank}
++
+.build.gradle.kts
+[source, kotlin]
+----
+tasks.create("hello") {
+    doLast {
+        println("Hi there!")
+    }
+}
+----
+* `./gradlew tasks`
+* our task is not there
+* `./gradlew tasks --all`
+* explain: missing group
+* set group and show that it now appears only with `./gradlew tasks`
++
+.build.gradle.kts
+[source, kotlin]
+----
+tasks.create("hello") {
+    group = "FedEx"
+    doLast {
+        println("Hi there!")
+    }
+}
+----

@@ -1,29 +1,5 @@
 == Draft
 
-* explain basics
-** lifecycle
-** DAG
-** custom tasks
 
-* show `gradle init`
-* explain the wrapper
-* multiple samples
-** java application
-** java library (explain "api" vs "implementation" vs "compileOnly" vs "runtimeOnly"; show where to find more information); dependency configurations
 
-* show where to find the latest versions of a plugin on https://plugins.gradle.org/
-* show how to use documentation
 
-* authoring best practices
-** e.g. the build should be declarative (by creating custom plugins)
-** cacheability of tasks
-** todo: others
-
-* tips
-** use Kotlin instead of Gradle, for the improved support in IntelliJ
-
-* show how to find information
-** about the DSL
-** about the object's javadoc
-
-* advanced: use included projects instead of `buildSrc`

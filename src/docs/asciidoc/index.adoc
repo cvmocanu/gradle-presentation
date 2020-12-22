@@ -5,8 +5,25 @@ include::terminology.adoc[]
 
 include::basic-project-setup.adoc[]
 
-include::lifecycle.adoc[]
+include::simple-custom-task.adoc[]
 
-include::lifecycle-demo.adoc[]
+include::build-phases.adoc[]
+
+include::build-phases-demo.adoc[]
 
 include::tasks-dependencies.adoc[]
+
+include::base-plugin.adoc[]
+
+== TODO
+* [yellow-background]#todo#: java plugins (java, application, java-library, java-platform)
+
+* [yellow-background]#todo#: show where to find the latest versions of a plugin on https://plugins.gradle.org/
+* [yellow-background]#todo#: show where to find information
+** about the DSL
+** about the object's javadoc
+* Custom tasks
+** cacheability of tasks
+
+* Custom plugins
+* advanced: use included projects instead of `buildSrc`

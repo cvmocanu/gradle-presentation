@@ -1,4 +1,4 @@
-=== Lifecycle demo
+== Build phases demo
 
 * {blank}
 +

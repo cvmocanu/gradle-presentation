@@ -1,4 +1,4 @@
-=== Tasks dependencies
+== Tasks dependencies
 
 * tell: we could use `doFirst`/`doLast` to attach actions before/after an existing task (e.g. java compilation)
 * but it's better to create a separate task and setup task dependencies
@@ -57,9 +57,8 @@ val makeTeaTask = tasks.register("makeTea") {
 * `./gradlew makeTea`
 * review build phases
 * tell: after the configuration phase we have a DAG (directed acyclic graph) of tasks
-** {blank}
 +
-[plantuml,class-diagram,png]
+[plantuml,hello-tasks-dependencies,png]
 ----
 @startdot
 digraph D {
@@ -98,3 +97,7 @@ rootProject {
 ----
 * `./gradlew makeTea tasksTree`
 * `./gradlew makeTea hello tasksTree`
+
+* note: keep builds declarative, by moving custom logic in custom plugins
+
+* note: `makeTea` doesn't do actual "work". It's there to group other tasks by depending on them. Gradle calls such tasks "lifecycle tasks".

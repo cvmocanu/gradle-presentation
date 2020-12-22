@@ -1,0 +1,20 @@
+== The base plugin
+
+[plantuml,base-plugin-tasks-dependencies,png]
+----
+@startdot
+digraph D {
+    node [shape=record fontname=Arial];
+
+    clean
+    check
+    assemble
+    build -> {check, assemble}
+
+}
+@enddot
+----
+* clean: deletes the `build` directory
+** with the build cache active, `./gradlew clean build` is not enough for a clean build, you need `./gradlew --no-build-cache clean build`.
+*** create a simple java app and show using `./gradlew --console=plain clean build` twice - the second time it should be `FROM-CACHE`
+*** retry with `./gradlew --console=plain --no-build-cache clean build`

@@ -1,4 +1,4 @@
-=== Lifecycle
+== Build phases
 
 * why do we need `doLast`?
 

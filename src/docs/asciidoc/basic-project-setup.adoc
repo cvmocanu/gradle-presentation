@@ -1,4 +1,4 @@
-=== Basic project setup
+== Basic project setup
 
 * show and explain my `~/.gradle/gradle.properties`
 +
@@ -45,32 +45,3 @@ org.gradle.warning.mode=all
 * `./gradlew tasks [--all]`
 * show how to setup the `taskTree` plugin
 
-=== Simple custom task
-
-* {blank}
-+
-.build.gradle.kts
-[source, kotlin]
-----
-tasks.create("hello") {
-    doLast {
-        println("Hi there!")
-    }
-}
-----
-* `./gradlew tasks`
-* our task is not there
-* `./gradlew tasks --all`
-* explain: missing group
-* set group and show that it now appears only with `./gradlew tasks`
-+
-.build.gradle.kts
-[source, kotlin]
-----
-tasks.create("hello") {
-    group = "FedEx"
-    doLast {
-        println("Hi there!")
-    }
-}
-----
