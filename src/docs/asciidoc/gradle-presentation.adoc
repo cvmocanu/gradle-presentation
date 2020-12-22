@@ -18,7 +18,12 @@ include::core-plugins.adoc[]
 include::where-to-find-help.adoc[]
 
 == TODO
-* [yellow-background]#todo#: java plugins (java, application, java-library, java-platform)
+* `java` plugin: link:https://docs.gradle.org/current/userguide/java_plugin.html#sec:java_compile_avoidance[Compile avoidance]
+* `application` plugin: creation of shell scripts
+* `java-library` plugin: `api` vs `implementation`
+* `java-platform` plugin
+** replacement for Maven `<dependencyManagement>`
+** replacement for Maven BOM
 
 
 == To be continued...
