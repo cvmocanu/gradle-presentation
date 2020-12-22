@@ -95,9 +95,21 @@ rootProject {
     apply<com.dorongold.gradle.tasktree.TaskTreePlugin>()
 }
 ----
-* `./gradlew makeTea tasksTree`
-* `./gradlew makeTea hello tasksTree`
+* `./gradlew makeTea taskTree`
+* `./gradlew makeTea hello taskTree`
 
 * note: keep builds declarative, by moving custom logic in custom plugins
 
 * note: `makeTea` doesn't do actual "work". It's there to group other tasks by depending on them. Gradle calls such tasks "lifecycle tasks".
+
+=== Final tips
+
+==== Tasks inputs & outputs / caching
+
+* most tasks have inputs and outputs. For example, the `JavaCompile` task has:
+** inputs
+*** task configuration (e.g. command-line arguments for `javac`)
+*** `.java` files to compile
+** outputs
+*** `.class` files
+* when creating custom tasks, it's important to declare the inputs and outputs, so that Gradle can do proper caching (e.g. no point to re-run a task if its inputs didn't change)

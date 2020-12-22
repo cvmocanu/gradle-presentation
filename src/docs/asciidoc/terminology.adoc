@@ -1,3 +1,0 @@
-== Terminology
-
-* maven module -> gradle project

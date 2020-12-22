@@ -1,0 +1,5 @@
+== Core plugins
+
+include::base-plugin.adoc[]
+
+include::java-plugin.adoc[]

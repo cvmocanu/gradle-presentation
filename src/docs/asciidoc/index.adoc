@@ -1,7 +1,7 @@
 = Gradle presentation
 :toc:
 
-include::terminology.adoc[]
+include::quick-comparison-to-maven.adoc[]
 
 include::basic-project-setup.adoc[]
 
@@ -13,17 +13,15 @@ include::build-phases-demo.adoc[]
 
 include::tasks-dependencies.adoc[]
 
-include::base-plugin.adoc[]
+include::core-plugins.adoc[]
+
+include::where-to-find-help.adoc[]
 
 == TODO
 * [yellow-background]#todo#: java plugins (java, application, java-library, java-platform)
 
-* [yellow-background]#todo#: show where to find the latest versions of a plugin on https://plugins.gradle.org/
-* [yellow-background]#todo#: show where to find information
-** about the DSL
-** about the object's javadoc
-* Custom tasks
-** cacheability of tasks
 
+== Later
+
+* Custom tasks
 * Custom plugins
-* advanced: use included projects instead of `buildSrc`

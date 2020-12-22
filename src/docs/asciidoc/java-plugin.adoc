@@ -1,0 +1,174 @@
+=== The `java` plugin
+// experimental attribute required to use the "kbd" macro (keyboard shortcuts)
+:experimental:
+
+==== Tasks dependencies
+
+[plantuml,java-plugin-tasks-dependencies,png]
+----
+@startdot
+digraph D {
+    node [shape=record fontname=Arial];
+
+    clean
+
+    // main code
+    classes -> {compileJava, processResources}
+    javadoc -> classes
+
+    // test code
+    compileTestJava -> classes
+    testClasses -> {compileTestJava, processTestResources}
+    test -> {classes, testClasses}
+
+    check -> test
+
+    // artifacts
+    assemble -> jar
+    jar -> classes
+
+    build -> {check, assemble}
+
+    // node styles
+    clean [fontcolor=gray55 label=<{<I>clean</I>}>]
+    check [fontcolor=gray55 label=<{<I>check</I>}>]
+    assemble [fontcolor=gray55 label=<{<I>assemble</I>}>]
+    build [fontcolor=gray55 label=<{<I>build</I>}>]
+}
+@enddot
+----
+
+==== Tasks description
+
+* *clean*: deletes the `build` directory
+** with the build cache active, `./gradlew clean build` is not enough for a clean build, you need `./gradlew --no-build-cache clean build`.
+*** create a simple java app and show using `./gradlew --console=plain clean build` twice - the second time it should be `FROM-CACHE`
+*** retry with `./gradlew --console=plain --no-build-cache clean build`
+* *check* _lifecycle task_: plugins will add verification tasks with `tasks.check.dependsOn(verificationTask)`
+* *assemble* _lifecycle task_: plugins will add tasks that produce artifacts (jar, tar.gz, etc.) with `tasks.check.dependsOn(artifactProducingTask)`
+
+==== Tasks dependencies demo
+
+* `mkcd my-library`
+* `gradle init`
+** type of project: "3: library"
+** implementation language: "3: java"
+** script DSL: "2: Kotlin"
+** test frameword: "4: JUnit Jupiter"
+** project name: `my-library` (just press kbd:[Enter])
+** source package: "com.mycompany"
+* `./gradlew build taskTree`
+
+==== Dependency configurations (including demo)
+
+* inside `my-library`
+** `./gradlew projects`
+** tell: already setup for a multi-project build
+** `./gradlew tasks`
+** point to the `dependencies` and `dependencyInsight` tasks
+** `./gradlew dependencies`
+** tell: the root project doesn't have dependencies (it doesn't even have a build script)
+** `./gradlew :lib:dependencies`
+** tell: project paths use `:` as separator
+** show the different configurations
+** tell: different configurations are used for different things
+** `./gradlew :lib:dependencies --configuration=compileClasspath`
+
+==== Java dependency configurations
+
+[plantuml,java-plugin-dependency-configurations,png]
+----
+@startdot
+digraph D {
+    node [shape=record fontname=Arial];
+
+    // main code
+    compileClasspath -> {compileOnly, implementation}
+    runtimeClasspath -> {implementation, runtimeOnly}
+
+    // test code
+    testRuntimeOnly -> runtimeOnly
+    testCompileClasspath -> {testCompileOnly, testImplementation}
+    testRuntimeClasspath -> {testRuntimeOnly, testImplementation}
+    testImplementation -> implementation
+
+    // styles
+    compileOnly [style=filled, fillcolor="#7fff00"]
+    implementation [style=filled, fillcolor="#7fff00"]
+    runtimeOnly [style=filled, fillcolor="#7fff00"]
+    testRuntimeOnly [fontcolor=gray55, style=filled, fillcolor="#7fff00", color=gray, penwidth=3]
+    testImplementation [fontcolor=gray55, style=filled, fillcolor="#7fff00", color=gray, penwidth=3]
+    testCompileOnly [fontcolor=gray55, style=filled, fillcolor="#7fff00", color=gray, penwidth=3]
+    testCompileClasspath [fontcolor=gray55, color=gray, penwidth=3]
+    testRuntimeClasspath [fontcolor=gray55, color=gray, penwidth=3]
+
+    // legend
+    { rank = sink;
+        Legend [shape=none, margin=0, label=<
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+         <tr>
+          <td colspan="2"><b>Legend</b></td>
+         </tr>
+         <tr>
+          <td cellpadding="4">
+           <table border="1" cellborder="0" cellspacing="0" cellpadding="0">
+            <tr>
+             <td bgcolor="#7fff00">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            </tr>
+           </table>
+          </td>
+          <td>you can declare dependencies here</td>
+         </tr>
+         <tr>
+          <td cellpadding="4">
+           <table border="1" cellborder="0" cellspacing="0" cellpadding="0">
+            <tr>
+             <td bgcolor="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            </tr>
+           </table>
+          </td>
+          <td>only used by tasks</td>
+         </tr>
+        </table>
+       >];
+      }
+    }
+}
+@enddot
+----
+* tell: Gradle has other dependency configurations that are not on this diagram. Those are deprecated and should not be used.
+
+
+==== Source sets
+
+* production and test code, are not hard-coded like in spring - they are just default source sets
+* by default, 2 source sets are added
+** main
+** test
+* adding a new source set, automatically adds some tasks:
+** {blank}
++
+[plantuml,java-plugin-source-set-tasks-dependencies,png]
+----
+@startdot
+digraph D {
+    node [shape=record fontname=Arial];
+
+    // main code
+    classes -> {compileJava, processResources}
+
+    // node styles
+    classes [label=<{<I>sourceSet</I>Classes}>]
+    compileJava [label=<{compile<I>SourceSet</I>Classes}>]
+    processResources [label=<{process<I>SourceSet</I>Resources}>]
+}
+@enddot
+----
+
+
+==== Final tips
+
+* don't use the `java` plugin directly - use one of the following:
+** `application`
+** `java-library`
+** `java-platform`

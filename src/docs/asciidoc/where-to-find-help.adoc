@@ -1,0 +1,8 @@
+== Where to find help
+
+* the latest versions of a plugin: https://plugins.gradle.org/
+* documentation: https://gradle.org/ -> Docs
+** *Core plugins*: Reference -> Core plugins
+** *DSL*: Gradle API -> Groovy DSL Reference + Kotlin DSL Primer (how to translate Groovy to Kotlin)
+** *Core types (Project, Task, etc.)*: Gradle API -> Groovy DSL Reference -> Core types
+** *Core tasks (Copy, Jar, Pmd, etc.)*: Gradle API -> Groovy DSL Reference ->  Task types
