@@ -30,10 +30,14 @@ digraph D {
     build -> {check, assemble}
 
     // node styles
-    clean [fontcolor=gray55 label=<{<I>clean</I>}>]
-    check [fontcolor=gray55 label=<{<I>check</I>}>]
-    assemble [fontcolor=gray55 label=<{<I>assemble</I>}>]
-    build [fontcolor=gray55 label=<{<I>build</I>}>]
+    clean [label=<{<i>clean</i>}>]
+    check [label=<{<i>check</i>}>]
+    assemble [label=<{<i>assemble</i>}>]
+    build [label=<{<i>build</i>}>]
+    test [fontcolor=gray55, color=gray, penwidth=3]
+    testClasses [fontcolor=gray55, color=gray, penwidth=3]
+    compileTestJava [fontcolor=gray55, color=gray, penwidth=3]
+    processTestResources [fontcolor=gray55, color=gray, penwidth=3]
 }
 @enddot
 ----
@@ -158,9 +162,9 @@ digraph D {
     classes -> {compileJava, processResources}
 
     // node styles
-    classes [label=<{<I>sourceSet</I>Classes}>]
-    compileJava [label=<{compile<I>SourceSet</I>Classes}>]
-    processResources [label=<{process<I>SourceSet</I>Resources}>]
+    classes [label=<{<i>sourceSet</i>Classes}>]
+    compileJava [label=<{compile<i>SourceSet</i>Classes}>]
+    processResources [label=<{process<i>SourceSet</i>Resources}>]
 }
 @enddot
 ----
