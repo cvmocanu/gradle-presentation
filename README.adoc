@@ -1,0 +1,14 @@
+== Readme
+
+This project contains the documents for a Gradle presentation I gave.
+
+=== Building
+
+To build the project:
+
+* make sure you have JDK 11+ installed
+* run `./gradlew build`
+
+=== Pre-built releases
+
+* to get HTML and PDF documents, go to link:https://github.com/cvmocanu/gradle-presentation/releases[releases].
