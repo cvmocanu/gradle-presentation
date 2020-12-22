@@ -14,7 +14,9 @@ digraph D {
 }
 @enddot
 ----
-* clean: deletes the `build` directory
+* *clean*: deletes the `build` directory
 ** with the build cache active, `./gradlew clean build` is not enough for a clean build, you need `./gradlew --no-build-cache clean build`.
 *** create a simple java app and show using `./gradlew --console=plain clean build` twice - the second time it should be `FROM-CACHE`
 *** retry with `./gradlew --console=plain --no-build-cache clean build`
+* *check* _lifecycle task_: plugins will add verification tasks with `tasks.check.dependsOn(verificationTask)`
+* *assemble* _lifecycle task_: plugins will add tasks that produce artifacts (jar, tar.gz, etc.) with `tasks.check.dependsOn(artifactProducingTask)`
