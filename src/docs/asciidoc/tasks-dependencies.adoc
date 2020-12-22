@@ -77,7 +77,7 @@ digraph D {
 ** then we execute the tasks and their dependencies, in the proper order
 * global config to see tasks DAG as a tree
 +
-.~/.gradle/.init.d/gradle-task-tree.gradle.kts
+.~/.gradle/init.d/gradle-task-tree.gradle.kts
 [source, kotlin]
 ----
 initscript {
