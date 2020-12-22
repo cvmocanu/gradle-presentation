@@ -21,7 +21,7 @@ include::where-to-find-help.adoc[]
 * [yellow-background]#todo#: java plugins (java, application, java-library, java-platform)
 
 
-== Later
+== To be continued...
 
 * Custom tasks
 * Custom plugins

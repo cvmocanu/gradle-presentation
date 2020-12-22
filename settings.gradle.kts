@@ -7,5 +7,6 @@ pluginManagement {
         }
 
         id("org.asciidoctor.jvm.convert") version versions.asciidoctor
+        id("org.asciidoctor.jvm.pdf") version versions.asciidoctor
     }
 }
