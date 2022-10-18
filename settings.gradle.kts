@@ -3,7 +3,7 @@ rootProject.name = "gradle-presentation"
 pluginManagement {
     plugins {
         val versions = object {
-            val asciidoctor = "3.3.0"
+            val asciidoctor = "3.3.2"
         }
 
         id("org.asciidoctor.jvm.convert") version versions.asciidoctor
