@@ -15,18 +15,21 @@ rootProject.name = "sample-lifecycle"
 [source, kotlin]
 ----
 tasks.register("hello") {
+    group = "FedEx"
     doLast {
         println("Hi there!")
     }
 }
 
 val pourHotWaterTask = tasks.register("pourWater") {
+    group = "Tea"
     doLast {
         println("pouring hot water in a mug")
     }
 }
 
 val addTeaBagsTask = tasks.register("addTeaBags") {
+    group = "Tea"
     dependsOn(pourHotWaterTask)
 
     doLast {
@@ -35,6 +38,7 @@ val addTeaBagsTask = tasks.register("addTeaBags") {
 }
 
 val addHoneyTask = tasks.register("addHoney") {
+    group = "Tea"
     dependsOn(pourHotWaterTask)
 
     doLast {
@@ -43,6 +47,7 @@ val addHoneyTask = tasks.register("addHoney") {
 }
 
 val makeTeaTask = tasks.register("makeTea") {
+    group = "Tea"
     dependsOn(addTeaBagsTask)
     dependsOn(addHoneyTask)
 
@@ -53,7 +58,7 @@ val makeTeaTask = tasks.register("makeTea") {
 
 
 ----
-* `./gradlew tasks --all`
+* `./gradlew tasks`
 * `./gradlew makeTea`
 * review build phases
 * tell: after the configuration phase we have a DAG (directed acyclic graph) of tasks
@@ -77,26 +82,26 @@ digraph D {
 ** then we execute the tasks and their dependencies, in the proper order
 * global config to see tasks DAG as a tree
 +
-.~/.gradle/init.d/gradle-task-tree.gradle.kts
+.~/.gradle/init.d/task-info.init.gradle.kts
 [source, kotlin]
 ----
+import org.barfuin.gradle.taskinfo.GradleTaskInfoPlugin
+
 initscript {
     repositories {
-        maven {
-          url = java.net.URI("https://plugins.gradle.org/m2/")
-        }
+        gradlePluginPortal()
     }
     dependencies {
-        classpath("gradle.plugin.com.dorongold.plugins:task-tree:1.5")
+        classpath("org.barfuin.gradle.taskinfo:gradle-taskinfo:2.0.0")
     }
 }
 
-rootProject {
-    apply<com.dorongold.gradle.tasktree.TaskTreePlugin>()
+allprojects {
+    apply<GradleTaskInfoPlugin>()
 }
 ----
-* `./gradlew makeTea taskTree`
-* `./gradlew makeTea hello taskTree`
+* `./gradlew tiTree hello`
+* `./gradlew tiTree makeTea`
 
 * note: keep builds declarative, by moving custom logic in custom plugins
 

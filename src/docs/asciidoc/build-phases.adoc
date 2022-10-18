@@ -31,5 +31,5 @@ include("o2p-tracing-model")
 ** run `build.gradle.kts` for each project to configure `Project` instances
 ** the result is a DAG of tasks
 * *3. execution*
-** determine what tasks to run (and in what order; parallelize if possible)
+** determine what tasks to run, and in what order
 ** run tasks

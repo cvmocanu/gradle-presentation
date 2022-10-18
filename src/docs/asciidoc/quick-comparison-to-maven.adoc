@@ -3,6 +3,6 @@
 * Maven module -> Gradle project
 * convention over configuration
 ** Maven hard-codes some conventions (e.g. production and test code)
-** in Gradle, conventions are coming from plugins. For example, you can have a custom integrationTest, in addition to "main" and "production", whereas in Maven you would need to create an additional module for the integration tests
+** in Gradle, conventions are coming from plugins. For example, you can have a custom `integrationTest` source set, in addition to `main` and `test`, whereas in Maven you would need to create an additional module for the integration tests
 ** this is part of Gradle's philosophy: we like conventions, but they should come from plugins
-*** note that puting a lot of logic in the build scripts (e.g. custom tasks) goes against Gradle's philosophy: such logic should be put in custom plugins instead, to keep builds declarative
+*** note that puting a lot of logic in the build scripts (e.g. custom tasks) goes against Gradle's philosophy: such logic should be put in custom plugins instead, *to keep builds declarative*

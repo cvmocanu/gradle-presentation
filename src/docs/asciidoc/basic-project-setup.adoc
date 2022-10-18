@@ -1,6 +1,6 @@
 == Basic project setup
 
-* show and explain my `~/.gradle/gradle.properties`
+* explain my `~/.gradle/gradle.properties`
 +
 [source, properties]
 ----
@@ -24,6 +24,7 @@ org.gradle.warning.mode=all
 * `gradle init`
 ** project type     "1: basic"
 ** build script DSL "2: Kotlin" (for IntelliJ support)
+** generate build using new APIs and behavior: no
 * import in IntelliJ
 * setup `.gitignore` (add IntelliJ files; group gradle files)
 * delete comments in `settings.gradle.kts`
@@ -39,9 +40,10 @@ org.gradle.warning.mode=all
 *** `--stacktrace`
 *** `--no-build-cache`
 *** `--no-daemon`
+*** `--scan`
 ** `-D` / `--system-prop`
 ** `-P` / `--project-prop`
 ** `-x` / `--exclude-task` (e.g. `./gradlew -x test -x pmd build`)
 * `./gradlew tasks [--all]`
-* show how to setup the `taskTree` plugin
-
+* show how to setup the `taskinfo` plugin
+* mention about gradle init scripts
